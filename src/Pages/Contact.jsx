@@ -13,7 +13,7 @@ function Contact() {
   <div class="absolute inset-0 bg-gray-300   mt-20 mb-20">
     
     <iframe width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="map" scrolling="no"
-    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11795.245597554454!2d77.33877879097064!3d28.487150010819395!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce7af054c77ab%3A0x3e053543a8384146!2sKCI%20Education!5e0!3m2!1sen!2sin!4v1705489426311!5m2!1sen!2sin"  class="filter grayscale-100 contrast-120 opacity-40"
+    src="https://maps.google.com/maps?q=KCI%20Education&t=&z=13&ie=UTF8&iwloc=&output=embed"  class="filter grayscale-100 contrast-120 opacity-40"
       ></iframe>
   </div>
   <div class="container px-5 py-24 mx-auto flex">
