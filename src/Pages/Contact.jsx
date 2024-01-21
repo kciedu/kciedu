@@ -9,7 +9,7 @@ function Contact() {
 
 }, []);
   return (
-    <section class="text-gray-700 body-font relative">
+    <section class=" body-font relative">
   <div class="absolute inset-0 bg-gray-300   mt-20 mb-20">
     
     <iframe width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="map" scrolling="no"
