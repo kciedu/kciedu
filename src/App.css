@@ -1,0 +1,21 @@
+img
+{
+    width: 100%;
+    object-fit: cover;
+}
+  
+  .swiper {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    padding: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
