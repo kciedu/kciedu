@@ -84,7 +84,7 @@ function Navbars() {
 }
         </div>
       </div>
-      <form action="#" method="POST" className={` flex w-full flex-col absolute top-16 left-0 lg:hidden ${opennav ? 'hidden' : ''} `}  >
+      <form className={` flex w-full flex-col absolute top-16 left-0 lg:hidden ${opennav ? 'hidden' : ''} `}  >
 
 <div class="relative mb-4 flex w-full  items-stretch">
   <input
