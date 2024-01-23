@@ -2,23 +2,28 @@ import React, { useState } from 'react'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { userconetxt } from '../context/Context'
-
+import {  IoMdSearch} from "react-icons/io";
+import course from '../Data/Course';
 function Navbars() {
 
     const [opennav, setnav]=useState(false)
-  const {userdata} = useContext(userconetxt)
+    const [listdata , setlistdata]= useState('')
+  const {userdata ,coursedata} = useContext(userconetxt)
+  const data = course.concat(coursedata)
+  const navbarlistdata = data.filter((i) => i.name?.toLowerCase().startsWith(listdata.toLowerCase()) || i.Name?.toLowerCase().startsWith(listdata.toLowerCase()) );
+
   return (
  
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white text-sm  dark:bg-gray-800 fixed left-0 right-0 top-0   ">
-    <nav class="max-w-[85rem] w-full mx-auto  sm:flex sm:items-center sm:justify-between shadow-sm p-4 px-10 pb-5" aria-label="Global">
+    <header class="flex flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full bg-white text-sm  dark:bg-gray-800 fixed left-0 right-0 top-0   ">
+    <nav class="max-w-[85rem] w-full mx-auto  lg:flex lg:items-center lg:justify-between shadow-sm p-4 px-10 pb-5" aria-label="Global">
       <div class="flex items-center justify-between">
         <Link class="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" to={'/'}>
         
-        <span className="text-white bg-black p-2 rounded-lg">KCI</span>
+        <span className="text-red-500 rounded-lg">KCI</span>
         
-        Eduction
+        Education
         </Link>
-        <div class="sm:hidden">
+        <div class="lg:hidden">
           <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-collapse="#navbar-image-and-text-1" aria-controls="navbar-image-and-text-1" aria-label="Toggle navigation" onClick={()=> setnav((prev)=>!prev)}>
             <svg class={`hs-collapse-open:hidden flex-shrink-0 w-4 h-4 ${opennav ? 'hidden' : ''}`}  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
             <svg class={`hs-collapse-open:block ${opennav ? '' : 'hidden'} flex-shrink-0 w-4 h-4`} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -27,9 +32,9 @@ function Navbars() {
       </div>
       <div
   id="navbar-image-and-text-1"
-  className={`hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block ${opennav ? '' : 'hidden'}`}
+  className={`hs-collapse overflow-hidden transition-all duration-300 basis-full grow lg:block z-50 ${opennav ? '' : 'hidden'}`}
 >
-        <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
+        <div class="flex flex-col gap-1 mt-5 lg:flex-row lg:items-center sm:justify-end lg:mt-0 lg:ps-5  z-50">
           {
             [
 
@@ -62,14 +67,14 @@ function Navbars() {
 
             ].map((i)=>
             
-            <Link to={i.path} class="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 border-r-2 border-solid border-blue-500  pl-4 pr-2 cursor-pointer" >{i.name}</Link>
+            <Link to={i.path} class="font-medium text-start   text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 border-r-2 border-solid border-blue-500  pl-3 pr-5 cursor-pointer" >{i.name}</Link>
             )
           }
 
       {
   userdata && userdata.data?.Name ? (
     <span className="font-medium text-white bg-blue-400 p-3 rounded-lg cursor-pointer">
-      {userdata.data.Name==="Admin" ? <Link to={'/dashbord'}> Admin </Link> : <Link to={'/'}> userdata.data.Name </Link>  }
+      {userdata.data.Name ==="Admin" ? <Link to={'/dashbord'}> Admin </Link> : <Link to={'/'}> { userdata.data.Name} </Link>  }
     </span>
   ) : (
     <Link to={'login'} className="login bg-blue-600 text-white p-2 rounded-md cursor-pointer">
@@ -79,6 +84,40 @@ function Navbars() {
 }
         </div>
       </div>
+      <form action="#" method="POST" className={` flex w-full flex-col absolute top-16 left-0 lg:hidden ${opennav ? 'hidden' : ''} `}  >
+
+<div class="relative mb-4 flex w-full  items-stretch">
+  <input
+    type="search"
+    class="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600  dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary box-border bg-white border-t-0"
+    placeholder="Search"
+    aria-label="Search"
+    aria-describedby="button-addon1" 
+    value={listdata}
+    onChange={(e)=> setlistdata(e.target.value)}
+    
+    />
+
+  <button
+    class="relative z-[2] flex items-center rounded-r bg-primary px-6   leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none  bg-blue-500 focus:ring-0 active:bg-primary-800 active:shadow-lg box-border"
+    type="button">
+    {<IoMdSearch></IoMdSearch>}
+  </button>
+</div>
+<ul className=' absolute right-0 left-0  top-8  max-h-96 overflow-y-scroll bg-white shadow-md' id='scrolling'>
+{
+ listdata.trim() !== '' && navbarlistdata.map((i)=>
+  <>
+  <Link to={`/details/${i?.name || i?.Name}`}>
+  <li className=' p-5 shadow-md cursor-pointer' >{i?.name || i?.Name} </li>
+  </Link>
+  </>
+  )
+}
+      
+</ul>      
+          </form>
+
     </nav>
   </header>
   

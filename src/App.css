@@ -1,3 +1,5 @@
+
+
 img
 {
     width: 100%;
@@ -18,4 +20,28 @@ img
     justify-content: center;
     align-items: center;
   }
+
+  #scrolling::-webkit-scrollbar
+  {
+    width: 4px;
+  }
+  #scrolling::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  #scrolling::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
   
+  /* Handle on hover */
+  #scrolling::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  @media (max-width:450px) {
+    #flexcols
+    {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }

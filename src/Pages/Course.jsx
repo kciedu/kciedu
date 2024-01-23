@@ -1,12 +1,23 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Cards from '../components/Card'
 import course from '../Data/Course'
 import video2 from '../assests/video2.mp4'
 import Typed from "typed.js";
+import { userconetxt } from '../context/Context';
+import { Link } from 'react-router-dom';
 function Course() {
 
 
   const el = useRef(null);
+  const [listdata , setlistdata]= useState('')
+  const {coursedata} = useContext(userconetxt)
+  const data = course.concat(coursedata)
+  
+  const navbarlistdata = data.filter((i) => i.name?.toLowerCase().startsWith(listdata.toLowerCase()) || i.Name?.toLowerCase().startsWith(listdata.toLowerCase()) );
+
+
+
+
 
   useEffect(() => {
   
@@ -54,6 +65,8 @@ function Course() {
           placeholder="Your favorite food"
           className="w-full p-4 rounded-full"
           type="text"
+          value={listdata}
+          onChange={(e)=> setlistdata(e.target.value)}
         />
         <button
           type="button"
@@ -64,6 +77,18 @@ function Course() {
             Search
           </span>
         </button>
+        <ul className=' absolute right-0 left-0   top-16 rounded-lg  max-h-96 overflow-y-scroll bg-white shadow-md' id='scrolling'>
+{
+ listdata.trim() !== '' && navbarlistdata.map((i)=>
+  <>
+  <Link to={`/details/${i?.name || i?.Name}`}>
+  <li className=' p-5 shadow-md cursor-pointer' >{i?.name || i?.Name} </li>
+  </Link>
+  </>
+  )
+}
+      
+</ul>  
       </div>
     </form>
     <p className="mt-8 text-white lg:w-10/12 text-sm md:text-base">
@@ -85,10 +110,11 @@ function Course() {
   <h2 className='text-3xl capitalize font-serif font-bold' >Our All course</h2>
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
 {
-  course.map((i)=>
-  
-<Cards name={i.name} des={i.des} src={i.src} flag={true}></Cards>
-    )
+data.map((i) => (
+  <Cards key={i?.id || i?._id} name={i?.name || i?.Name} des={i?.des || i?.Fees} src={i?.src || i?.Image} flag={true}></Cards>
+))
+
+
 }
 
 

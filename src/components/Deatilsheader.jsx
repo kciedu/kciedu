@@ -1,16 +1,39 @@
 import React from 'react'
 import { GiBrain } from "react-icons/gi";
+import { FaBookAtlas } from "react-icons/fa6";
+import { FaGraduationCap } from "react-icons/fa";
+import { CiCloudSun } from "react-icons/ci";
 function Deatilsheader() {
   return (
-    <div className="w-full bg-blue-900 min-h-16 flex items-center justify-between flex-wrap p-5">
-    {["Best Learing","Best enviroment","Best placement","Best teachers"].map((i) => (
+    <div className="w-full bg-blue-400  flex items-center justify-between flex-wrap p-2 pl-3">
+    {[ 
+      {
+        name:"Learn The Essential Skills",
+        icons:  < GiBrain/> 
+      } ,
+      {
+        name:"Earn Certificates And Degrees",
+        icons:  < FaBookAtlas/> 
+      } ,
+      {
+        name:"Get Ready for The Next Career",
+        icons:  < FaBookAtlas/>
+      } ,
+      {
+        name:"Master at Different Areas",
+        icons:   < CiCloudSun/> 
+      } ,
+          
+  
+  ].map((i) => (
       <div className="infobox max-w-[300px] flex items-center gap-2 ml-2 justify-center mt-2">
-        <div className="icon text-white text-lg sm:text-xl md:text-2xl"><GiBrain /></div>
-        <div className="text text-white text-lg sm:text-xl md:text-2xl">{i}</div>
+        <div className="icon text-white text-lg sm:text-lg md:text-3xl">{i.icons}</div>
+        <div className="text text-white text-lg sm:text-sm md:text-xl">{i.name}</div>
       </div>
     ))}
   </div>
   )
 }
+
 
 export default Deatilsheader

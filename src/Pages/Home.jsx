@@ -15,11 +15,14 @@ import Deatilsheader from '../components/Deatilsheader';
 import { Link } from 'react-router-dom';
 import Roadmap from '../components/Roadmap';
 import Conatctmenu from '../components/Conatctmenu';
+import { userconetxt } from '../context/Context';
 
 function Home() {
   const [slidesPerView, setSlidesPerView] = useState(1);
   const [address, setaddress] = useState('Roshan nager  Agwanpur faridabad');
   const [countdown, setCountdown] = useState(calculateCountdown());
+  const {coursedata} = useContext(userconetxt)
+  const data = course.concat(coursedata)
   
   useEffect(() => {
     // Update the countdown every second
@@ -81,14 +84,14 @@ function Home() {
       <section className='top programs'>
         <h2 className="text-4xl p-10 font-bold ">Explore Top Programs</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-10 place-items-center	'>
-          {course.map((i) =>
-          <Link to={`/details/${i.name}`} className='flex items-center shadow-lg min-w-full bg-gray-50 rounded-lg '>
+          {data.map((i) =>
+          <Link to={`/details/${i?.name || i?.Name}`} className='flex items-center shadow-lg min-w-full bg-gray-50 rounded-lg '>
            
 
               <div className="w-20">
-                <img src={i.src}alt={i.name} className=' max-h-12 object-cover' />
+                <img src={i?.src || i?.Image}alt={i?.name || i?.Name} className=' max-h-12 object-cover' />
               </div>
-              <p className="p-5" >{i.name}</p>
+              <p className="p-5" >{i?.name || i?.Name}</p>
            
           </Link>
           )}
@@ -96,7 +99,7 @@ function Home() {
       </section>
       <section className='upcoming Batches p-10'>
         <h2 className="text-4xl font-bold">Upcoming Batches : <span className=' text-red-500'>{`${countdown.hours}h ${countdown.minutes}m ${countdown.seconds}s`}</span></h2>
-        <div className="branch flex items-center gap-3 flex-wrap mt-5">
+        <div className="branch flex items-center gap-3 flex-wrap mt-5" id='flexcols'>
           <span>Choose your Location:</span>
           <div className='w-12'>
             <Select variant="standard" label="Select place" onChange={(e) => setaddress(e)}>
@@ -118,9 +121,9 @@ function Home() {
             modules={[Autoplay]}
             className="mySwiper sm:swiper-2 md:swiper-3 lg:swiper-4 xl:swiper-5"
           >
-            {course.map((i) =>
+            {data.map((i) =>
               <SwiperSlide>
-                <Cards name={i.name} src={i.src} des={address}></Cards>
+                <Cards key={i?.id || i?._id} name={i?.name || i?.Name} des={i?.des || i?.Fees} src={i?.src || i?.Image} flag={true}></Cards>
               </SwiperSlide>
             )}
           </Swiper>
@@ -143,9 +146,9 @@ function Home() {
             modules={[Autoplay]}
             className="mySwiper sm:swiper-2 md:swiper-3 lg:swiper-4 xl:swiper-5"
           >
-            {course.map((i) =>
+            {data.map((i) =>
               <SwiperSlide>
-                <Cards name={i.name} src={i.src} details={i.des} flag={false} pdf={i.data}></Cards>
+               <Cards key={i?.id || i?._id} name={i?.name || i?.Name} des={i?.des || i?.Fees} src={i?.src || i?.Image} flag={false} pdf={i?.data || i?.PDF}></Cards>
               </SwiperSlide>
             )}
           </Swiper>

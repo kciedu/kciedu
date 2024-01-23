@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import course from '../Data/Course'
 import { useParams } from 'react-router-dom'
+import { userconetxt } from '../context/Context'
 
 function Deatils() {
 
 
 const {name}= useParams(null)
-const data = course.find((item)=> item.name == name)
+const {coursedata} = useContext(userconetxt)
+const info = course.concat(coursedata);
+const data = info.find((item) => item?.Name === name || item?.name === name);
+
 
 
  useEffect(() => {
@@ -23,11 +27,11 @@ const data = course.find((item)=> item.name == name)
 
 
     <div className="img max-w-sm">
-    <img src={data?.src} alt="" />
+    <img src={data?.src || data?.Image} alt="" />
     </div>
     <p className='mt-5'>
     Elevate your skills with Ducat India! Explore top-notch training courses for a future-ready career. Unlock a world of cutting-edge programs designed to elevate your skills and propel your career forward with
-      {data?.des}
+      {data?.des || data?.Name}
     </p>
    </div>
 
