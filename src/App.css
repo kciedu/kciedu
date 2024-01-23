@@ -43,5 +43,9 @@ img
     {
       display: flex;
       flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+   
     }
   }
