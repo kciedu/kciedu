@@ -13,7 +13,6 @@ function Providerfunction({ children }) {
   const [coursedata , setcoursedata] = useState([])
   const [update, setupdate]= useState()
   const [studentdata, setstudentdata]= useState()
-console.log("teh value of ", coursedata);
   useEffect(() => {
     const fetchData = async () => {
       try {

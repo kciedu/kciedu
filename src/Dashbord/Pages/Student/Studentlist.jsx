@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import API_ENDPOINT from '../../../config';
 import Tableloading from '../../../Loader/Tableloading';
+import { userconetxt } from '../../../context/Context';
 
 function Studentlist() {
 
+   const {setstudentdata}= useContext(userconetxt)
     const [newstudentdata , setnewstudnetdata]= useState([])
 
 
@@ -24,6 +26,7 @@ function Studentlist() {
                 const data = await response.json();
                console.log("the log dta a", data.data);
                setnewstudnetdata(data.data)
+               setstudentdata(data.data.length)
               } else {
                 console.log("error somthing went wrong");
               }
@@ -115,7 +118,7 @@ if(newstudentdata.length == 0 || newstudentdata == null)
             <th className="py-2 px-4 border-b border-gray-300">Status</th>
             <th className="py-2 px-4 border-b border-gray-300">Admission Date</th>
             <th className="py-2 px-4 border-b border-gray-300">Password</th>
-            <th className="py-2 px-4 border-b border-gray-300">Detel</th>
+            <th className="py-2 px-4 border-b border-gray-300">Delete</th>
             <th className="py-2 px-4 border-b border-gray-300">Update</th>
      
           </tr>
@@ -139,8 +142,8 @@ if(newstudentdata.length == 0 || newstudentdata == null)
               <td className="py-2 px-4">{student.Status ? 'Active' : 'Inactive'}</td>
               <td className="py-2 px-4">{student.Admission_date}</td>
               <td className="py-2 px-4">{student.password}</td>
-              <td className="py-2 px-4">  <button onClick={() => handleDelete(student._id)}>Delete</button></td>
-              <td className="py-2 px-4"><button>Update</button></td>
+              <td className="py-2 px-4 p-1 bg-red-600">  <button onClick={() => handleDelete(student._id)}>Delete</button></td>
+              <td className="py-2 px-4  p-1 bg-blue-500"><button>Update</button></td>
             </tr>
           ))}
         </tbody>

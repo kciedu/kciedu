@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { userconetxt } from '../../../context/Context'
 
 function Dashbordcardhomepage() {
-  const {loginuserdata ,coursedata} = useContext(userconetxt)  
+  const {loginuserdata ,coursedata ,studentdata} = useContext(userconetxt)  
    
 
 return (
@@ -32,7 +32,7 @@ return (
       id:2,
       name:"Total students",
       path:"/dashbord/student",
-      num:"4000"
+      num:studentdata
     },
   
     {
