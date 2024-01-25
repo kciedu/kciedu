@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import API_ENDPOINT from '../../../config';
+import Tableloading from '../../../Loader/Tableloading';
 
 function Studentlist() {
 
     const [newstudentdata , setnewstudnetdata]= useState([])
-console.log("the dtaa is ", newstudentdata);
+
 
 
     useEffect(() => {
@@ -60,6 +61,15 @@ console.log("the dtaa is ", newstudentdata);
         }
       };
     
+
+
+        
+if(newstudentdata.length == 0 || newstudentdata == null)
+{
+   return <Tableloading></Tableloading>
+}
+
+
 
 
 
