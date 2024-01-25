@@ -19,7 +19,7 @@ function Navbars() {
       <div class="flex items-center justify-between">
         <Link class="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" to={'/'}>
         
-        <span className="text-red-500 rounded-lg">KCI</span>
+        <span className="text-white rounded-md p-1 bg-red-500">KCI</span>
         
         Education
         </Link>

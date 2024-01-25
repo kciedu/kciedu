@@ -12,6 +12,7 @@ function Providerfunction({ children }) {
   const [loading, setLoading] = useState(true);
   const [coursedata , setcoursedata] = useState([])
   const [update, setupdate]= useState()
+  const [studentdata, setstudentdata]= useState()
 console.log("teh value of ", coursedata);
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +70,7 @@ console.log("teh value of ", coursedata);
   }, [islogin ,user]);
 
   return (
-    <userconetxt.Provider value={{ user, setuser, islogin, setlogin, userdata, username , setloginuserdata ,loginuserdata ,coursedata ,setupdate}}>
+    <userconetxt.Provider value={{ user, setuser, islogin, setlogin, userdata, username , setloginuserdata ,loginuserdata ,coursedata ,setupdate , setstudentdata , studentdata}}>
       {!loading && children}
     </userconetxt.Provider>
   );

@@ -1,9 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import API_ENDPOINT from '../../../config';
 
 function Studentlist() {
 
-const users = [1,2,3,4,5]
+    const [newstudentdata , setnewstudnetdata]= useState([])
+console.log("the dtaa is ", newstudentdata);
+
+
+    useEffect(() => {
+        const checkToken = async () => {
+          const storedToken = localStorage.getItem('token');
+          if (storedToken) {
+            try {
+              const response = await fetch(`${API_ENDPOINT}/Allstudentdata`, {
+                headers: {
+                  Authorization: `Bearer ${storedToken}`,
+                },
+              });
+    
+              if (response.ok) {
+                const data = await response.json();
+               console.log("the log dta a", data.data);
+               setnewstudnetdata(data.data)
+              } else {
+                console.log("error somthing went wrong");
+              }
+            } catch (error) {
+              console.error("Error fetching profile data:", error);
+            } 
+          } 
+        };
+    
+        checkToken();
+      }, []);
+
+
+
+      const handleDelete = async (id) => {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+          try {
+            const response = await fetch(`${API_ENDPOINT}/deleteStudent/${id}`, {
+              method: 'DELETE',
+              headers: {
+                Authorization: `Bearer ${storedToken}`,
+              },
+            });
+    
+            if (response.ok) {
+              // Remove the deleted student from the state
+              setnewstudnetdata((prevData) => prevData.filter((student) => student._id !== id));
+            } else {
+              console.log("Error: Something went wrong");
+            }
+          } catch (error) {
+            console.error("Error deleting student:", error);
+          }
+        }
+      };
+    
+
 
 
   return (
@@ -11,8 +68,8 @@ const users = [1,2,3,4,5]
     <div class="bg-white p-8 rounded-md w-full">
         <div class=" flex items-center justify-between pb-6">
             <div>
-                <h2 class="text-gray-600 font-semibold ">Products Oder</h2>
-                <span class="text-xs">All products item</span>
+                <h2 class="text-gray-600 font-semibold ">All students data</h2>
+                <span class="text-xs">All student currect data</span>
             </div>
             <Link to={'/dashbord/newstudent'}>
                 <button class="bg-white hover:bg-gray-100  text-gray-800 font-semibold py-2 px-4 border border-gray-400  rounded shadow">Add new Items </button>
@@ -30,101 +87,55 @@ const users = [1,2,3,4,5]
                     
                 </div>
             </div>
-            <div>
-                <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                        <table class="min-w-full leading-normal">
-                            <thead>
-                                <tr>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Name
-                                    </th>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Cetagory
-                                    </th>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Price
-                                    </th>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        orignialprice
-                                    </th>
-                                    <th
-                                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Discount
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    users.map((item ,index)=>
-                                    
-                                <tr key={index}>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 w-10 h-10">
-                                                <img class="w-full h-full rounded-full"
-                                                    src={`data:image/jpg;base64,${item[4]}`}
-                                                    alt="no image" />
-                                            </div>
-                                                <div class="ml-3">
-                                                    <p class="text-gray-900 whitespace-no-wrap">
-                                                        {item[1]}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">   {item[2]}</p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                          {item[5]}
-                                        </p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            {item[6]}
-                                        </p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <span
-                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                            <span aria-hidden
-                                                class="absolute inset-0  bg-red-700  rounded-full "></span>
-                                        <span class="relative text-white">{item[7]}</span>
-                                        </span>
-                                    </td>
-                                </tr>
-                                    )
-                                }
-                              
-                            </tbody>
-                        </table>
-                        <div
-                            class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-                            
-                            <span class="text-xs xs:text-sm text-gray-900">
-                                Showing 1 to 4 of {users.length} Entries
-                            </span>
-                            <div class="inline-flex mt-2 xs:mt-0">
-                                <button
-                                    class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
-                                    Prev
-                                </button>
-                                &nbsp; &nbsp;
-                                <button
-                                    class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
-                                    Next
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div className="bg-gray-200 p-4 overflow-scroll  min-h-screen">
+      <table className="w-full bg-white border border-gray-300">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 border-b border-gray-300">Photo</th>
+            <th className="py-2 px-4 border-b border-gray-300">First Name</th>
+            <th className="py-2 px-4 border-b border-gray-300">Last Name</th>
+            <th className="py-2 px-4 border-b border-gray-300">Course</th>
+            <th className="py-2 px-4 border-b border-gray-300">Mobile Number</th>
+            <th className="py-2 px-4 border-b border-gray-300">Confirm Number</th>
+            <th className="py-2 px-4 border-b border-gray-300">Email</th>
+            <th className="py-2 px-4 border-b border-gray-300">Date of Birth</th>
+            <th className="py-2 px-4 border-b border-gray-300">Gender</th>
+            <th className="py-2 px-4 border-b border-gray-300">Student ID</th>
+            <th className="py-2 px-4 border-b border-gray-300">Username</th>
+            <th className="py-2 px-4 border-b border-gray-300">Status</th>
+            <th className="py-2 px-4 border-b border-gray-300">Admission Date</th>
+            <th className="py-2 px-4 border-b border-gray-300">Password</th>
+            <th className="py-2 px-4 border-b border-gray-300">Detel</th>
+            <th className="py-2 px-4 border-b border-gray-300">Update</th>
+     
+          </tr>
+        </thead>
+        <tbody>
+          {newstudentdata.map((student, index) => (
+            <tr key={index} className="border-b border-gray-300">
+              <td className="py-2 px-4">
+                <img src={student.photo} alt="Student" className="w-10 h-10 rounded-full" />
+              </td>
+              <td className="py-2 px-4">{student.firstname}</td>
+              <td className="py-2 px-4">{student.lastname}</td>
+              <td className="py-2 px-4">{student.course}</td>
+              <td className="py-2 px-4">{student.Mobilenumber}</td>
+              <td className="py-2 px-4">{student.confirmnumber}</td>
+              <td className="py-2 px-4">{student.Email}</td>
+              <td className="py-2 px-4">{student.Date_of_brith}</td>
+              <td className="py-2 px-4">{student.Gender}</td>
+              <td className="py-2 px-4">{student.StudentID}</td>
+              <td className="py-2 px-4">{student.username}</td>
+              <td className="py-2 px-4">{student.Status ? 'Active' : 'Inactive'}</td>
+              <td className="py-2 px-4">{student.Admission_date}</td>
+              <td className="py-2 px-4">{student.password}</td>
+              <td className="py-2 px-4">  <button onClick={() => handleDelete(student._id)}>Delete</button></td>
+              <td className="py-2 px-4"><button>Update</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
         </div>
   )
 }

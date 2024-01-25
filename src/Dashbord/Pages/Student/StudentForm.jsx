@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import API_ENDPOINT from '../../../config';
-
+import { Link } from 'react-router-dom'
 const StudentForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
-    middleName: '',
     lastName: '',
     course: '',
     phoneNumber: '',
@@ -21,41 +20,50 @@ const StudentForm = () => {
   });
 
   const handleChange = (e) => {
-    console.log("the valueis ", e.target.type);
-    if (e.target.type === 'file') {
+    if (e.target.name === 'Files') {
       setFormData({ ...formData, Files: e.target.files[0] });
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const searchParams = new URLSearchParams();
-
-      Object.entries(formData).forEach(([key, value]) => {
-        // Append each key-value pair to URLSearchParams
-        if (key === 'Files') {
-          // If it's a file, append it separately
-          searchParams.append(key, value);
-        } else {
-          searchParams.append(key, value);
-        }
-      });
-      console.log("the value is ", searchParams.toString());
-      const response = await fetch(`${API_ENDPOINT}/newstudents`, {
+      const formDataObj = new FormData();
+  
+      // Append each form field to the FormData object
+      formDataObj.append('firstName', formData.firstName);
+      formDataObj.append('lastName', formData.lastName);
+      formDataObj.append('course', formData.course);
+      formDataObj.append('phoneNumber', formData.phoneNumber);
+      formDataObj.append('confirmPhoneNumber', formData.confirmPhoneNumber);
+      formDataObj.append('email', formData.email);
+      formDataObj.append('dob', formData.dob);
+      formDataObj.append('gender', formData.gender);
+      formDataObj.append('occupation', formData.occupation);
+      formDataObj.append('state', formData.state);
+      formDataObj.append('city', formData.city);
+      formDataObj.append('postcode', formData.postcode);
+      formDataObj.append('address', formData.address);
+  
+      // Append the file
+      formDataObj.append('Files', formData.Files);
+      console.log("the value is ", formDataObj);
+  
+      const response = await fetch(`${API_ENDPOINT}/studentadmission`, {
         method: 'POST',
-        body: searchParams.toString(),
+        body: formDataObj,
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
       });
-
+  
       if (response.ok) {
         console.log('Student data submitted successfully');
-        // Add any additional logic after successful submission
+        alert("Data submitted");
       } else {
         console.error('Failed to submit student data');
       }
@@ -63,11 +71,12 @@ const StudentForm = () => {
       console.error('Error:', error);
     }
   };
+  
+  
 
   const handleReset = () => {
     setFormData({
       firstName: '',
-      middleName: '',
       lastName: '',
       course: '',
       phoneNumber: '',
@@ -89,7 +98,7 @@ const StudentForm = () => {
       <div className="bg-white p-10 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-4">Student Form</h1>
         <form className="space-y-6  " onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="firstName" className="block text-gray-800 font-bold mb-2">
                 First Name
@@ -104,20 +113,7 @@ const StudentForm = () => {
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <label htmlFor="middleName" className="block text-gray-800 font-bold mb-2">
-                Middle Name
-              </label>
-              <input
-                type="text"
-                id="middleName"
-                name="middleName"
-                className="w-full border border-gray-300 p-2 rounded-lg"
-                placeholder="Enter middle name"
-                value={formData.middleName}
-                onChange={handleChange}
-              />
-            </div>
+  
             <div>
               <label htmlFor="lastName" className="block text-gray-800 font-bold mb-2">
                 Last Name
@@ -322,7 +318,6 @@ const StudentForm = () => {
   id="File"
   name="Files"  // Change 'File' to 'Files' to match the state key
   className="w-full border border-gray-300 p-2 rounded-lg"
- 
   onChange={handleChange}
 />
 
@@ -341,16 +336,19 @@ const StudentForm = () => {
             >
               Reset
             </button>
+            <Link to={'/dashbord/student'}> 
             <button
               type="button"
               className="rounded-3xl bg-red-500 px-6 py-2 text-xl font-medium uppercase text-white"
             >
               Cancel
             </button>
+            </Link>
             <button
               type="button"
               className="rounded-3xl bg-blue-500 px-6 py-2 text-xl font-medium uppercase text-white"
-            >
+              onClick={handleReset}
+           >
               Add New Student
             </button>
           </div>

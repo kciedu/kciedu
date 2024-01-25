@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
  
 const LINKS = [
   {
@@ -20,7 +21,12 @@ export function Footer() {
       <div className="mx-auto w-full max-w-7xl px-8">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
           <Typography variant="h5" className="mb-6">
-            Kci Eduction
+          <Link class="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" to={'/'}>
+        
+        <span className="text-white rounded-md p-1 bg-red-500">KCI</span>
+        
+        Education
+        </Link>
           </Typography>
           <div className=" flex  justify-end gap-10">
             {LINKS.map(({ title, items }) => (
