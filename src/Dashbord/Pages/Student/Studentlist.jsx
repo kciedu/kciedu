@@ -142,8 +142,8 @@ if(newstudentdata.length == 0 || newstudentdata == null)
               <td className="py-2 px-4">{student.Status ? 'Active' : 'Inactive'}</td>
               <td className="py-2 px-4">{student.Admission_date}</td>
               <td className="py-2 px-4">{student.password}</td>
-              <td className="py-2 px-4 p-1 bg-red-600">  <button onClick={() => handleDelete(student._id)}>Delete</button></td>
-              <td className="py-2 px-4  p-1 bg-blue-500"><button>Update</button></td>
+              <td className="py-2 px-4 p-1 bg-red-600">  <button onClick={() => handleDelete(student._id)} >Delete</button></td>
+              <td className="py-2 px-4  p-1 bg-blue-500 "><button className='text-white'>Update</button></td>
             </tr>
           ))}
         </tbody>
