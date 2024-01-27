@@ -33,7 +33,7 @@ function Studentlist() {
             const data = await response.json();
             setnewstudnetdata(data.data);
             setTotalPages(Math.ceil(data.total / pageSize));
-            setstudentdata(data.data.length);
+            setstudentdata(data.total);
           } else {
             console.log("Error: Something went wrong");
           }
