@@ -9,7 +9,7 @@ import Signup from './Pages/Signup';
 import Deatils from './Pages/Deatils';
 import About from './Pages/About';
 
-import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import DashbordHome from './Dashbord/Pages/Home/DashbordHome';
 import Protexted from './Pages/Protextedrouter/Protexted';
 import Dashbordcardhomepage from './Dashbord/Pages/Home/Dashbordcardhomepage';
@@ -24,6 +24,7 @@ import Addcourse from './Dashbord/Pages/Course/Addcourse';
 import StudentForm from './Dashbord/Pages/Student/StudentForm';
 import Teacherlist from './Dashbord/Pages/Teacher/Teacherlist';
 import Newteacher from './Dashbord/Pages/Teacher/Newteacher';
+import UpdateStudentForm from './Dashbord/Pages/Student/Updatefrom';
 
 function App() {
 
@@ -52,11 +53,12 @@ function App() {
     <Route path='Loginstudent' element={<Loginstudent />} /> 
 
     <Route path='student' element={<Studentlist />} />
-    <Route path='teacher' element={<Teacherlist />} />
-    <Route path='newteacher' element={<Newteacher />} />
+    <Route path='newstudent' element={<StudentForm />} />
+    <Route path='updatestudent/:studentId' element={< UpdateStudentForm />} />
 
     
-    <Route path='newstudent' element={<StudentForm />} />
+    <Route path='teacher' element={<Teacherlist />} />
+    <Route path='newteacher' element={<Newteacher />} />
     <Route path='course' element={<Courselist />} />
     <Route path='newcourse' element={<Addcourse />} />
     <Route path='logout' element={<Massage />} />

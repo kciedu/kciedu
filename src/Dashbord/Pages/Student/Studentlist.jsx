@@ -41,7 +41,18 @@ function Studentlist() {
 
 
 
-      const handleDelete = async (id) => {
+      const handleDelete = async (id , name) => {
+
+
+        const conform = confirm("are you want to delect the value of", name)
+
+        if(conform)
+        {
+
+        
+
+
+
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
           try {
@@ -62,6 +73,11 @@ function Studentlist() {
             console.error("Error deleting student:", error);
           }
         }
+
+
+      }
+
+
       };
     
 
@@ -106,12 +122,12 @@ if(newstudentdata.length == 0 || newstudentdata == null)
           <tr>
             <th className="py-2 px-4 border-b border-gray-300">Photo</th>
             <th className="py-2 px-4 border-b border-gray-300">First Name</th>
-            <th className="py-2 px-4 border-b border-gray-300">Last Name</th>
+            {/* <th className="py-2 px-4 border-b border-gray-300">Last Name</th> */}
             <th className="py-2 px-4 border-b border-gray-300">Course</th>
             <th className="py-2 px-4 border-b border-gray-300">Mobile Number</th>
             <th className="py-2 px-4 border-b border-gray-300">Confirm Number</th>
             <th className="py-2 px-4 border-b border-gray-300">Email</th>
-            <th className="py-2 px-4 border-b border-gray-300">Date of Birth</th>
+            <th className="py-2 px-4 border-b border-gray-300">D O B</th>
             <th className="py-2 px-4 border-b border-gray-300">Gender</th>
             <th className="py-2 px-4 border-b border-gray-300">Student ID</th>
             <th className="py-2 px-4 border-b border-gray-300">Username</th>
@@ -130,20 +146,23 @@ if(newstudentdata.length == 0 || newstudentdata == null)
                 <img src={student.photo} alt="Student" className="w-10 h-10 rounded-full" />
               </td>
               <td className="py-2 px-4">{student.firstname}</td>
-              <td className="py-2 px-4">{student.lastname}</td>
+              {/* <td className="py-2 px-4">{student.lastname}</td> */}
               <td className="py-2 px-4">{student.course}</td>
               <td className="py-2 px-4">{student.Mobilenumber}</td>
               <td className="py-2 px-4">{student.confirmnumber}</td>
               <td className="py-2 px-4">{student.Email}</td>
-              <td className="py-2 px-4">{student.Date_of_brith}</td>
+              <td className="py-2 px-6">{student.Date_of_brith}</td>
               <td className="py-2 px-4">{student.Gender}</td>
               <td className="py-2 px-4">{student.StudentID}</td>
               <td className="py-2 px-4">{student.username}</td>
               <td className="py-2 px-4">{student.Status ? 'Active' : 'Inactive'}</td>
               <td className="py-2 px-4">{student.Admission_date}</td>
               <td className="py-2 px-4">{student.password}</td>
-              <td className="py-2 px-4 p-1 bg-red-600">  <button onClick={() => handleDelete(student._id)} className='text-white' >Delete</button></td>
-              <td className="py-2 px-4  p-1 bg-blue-500 "><button className='text-white'>Update</button></td>
+              <td className="py-2 px-4 p-1 bg-red-600">  <button onClick={() => handleDelete(student._id , student.firstname)} className='text-white' >Delete</button></td>
+              <td className="py-2 px-4  p-1 bg-blue-500 "><Link to={`/dashbord/updatestudent/${student._id}`} className="text-white">
+  Update
+</Link>
+</td>
             </tr>
           ))}
         </tbody>

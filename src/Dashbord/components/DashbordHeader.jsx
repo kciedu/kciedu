@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 function DashbordHeader() {
-  return (
+   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+   const toggleSidebar = () => {
+     setIsSidebarOpen(!isSidebarOpen);
+   };
+ 
+ 
+   return (
   
 
 <div>
@@ -12,7 +19,13 @@ function DashbordHeader() {
             <div class="flex items-center justify-start">
                
 			   
-			   <button id="toggleSidebarMobile" aria-expanded="true" aria-controls="sidebar" class="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded">
+			   <button
+                onClick={toggleSidebar}
+                id="toggleSidebarMobile"
+                aria-expanded="true"
+                aria-controls="sidebar"
+                className="mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
+              >
                   <svg id="toggleSidebarMobileHamburger" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                   </svg>
@@ -37,26 +50,18 @@ function DashbordHeader() {
 
 
 
-   <div class="flex overflow-hidden bg-white pt-16">
-      
-	  <aside id="sidebar" class="fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
-         <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
-            <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-               <div class="flex-1 px-3 bg-white divide-y space-y-1">
-                  <ul class="space-y-2 pb-2">
-                     <li>
-                        <form action="#" method="GET" class="lg:hidden">
-                           <label for="mobile-search" class="sr-only">Search</label>
-                           <div class="relative">
-                              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                 <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                                 </svg>
-                              </div>
-                              <input type="text" name="email" id="mobile-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Search"/>
-                           </div>
-                        </form>
-                     </li>
+   <div className="flex overflow-hidden bg-white pt-16">
+        <aside
+          id="sidebar"
+          className={`fixed ${
+            isSidebarOpen ? 'lg:flex' : 'hidden lg:hidden'
+          } z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75`}
+          aria-label="Sidebar"
+        >
+          <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
+            <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+              <div className="flex-1 px-3 bg-white divide-y space-y-1">
+                <ul className="space-y-2 pb-2">           
                      <li>
 					 {
                 
