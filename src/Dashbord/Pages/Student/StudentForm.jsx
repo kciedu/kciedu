@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import API_ENDPOINT from '../../../config';
 import { Link } from 'react-router-dom'
 import course from '../../../Data/Course';
+import { userconetxt } from '../../../context/Context';
 
 const StudentForm = () => {
 
-
+  const {coursedata}= useContext(userconetxt)
+  const data = course.concat(coursedata)
+  console.log("the value of data ", data);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -146,9 +149,13 @@ const StudentForm = () => {
               onChange={handleChange}
             >
               <option value="">Select Course</option>
-              <option value="ms-word">MS Word</option>
-              <option value="excel">Excel</option>
-              <option value="web-design">Web Design</option>
+            {
+              data.map((i)=>
+              
+              
+              <option value={i?.name || i?.Name}>{i?.name || i?.Name}</option>
+              )
+            }
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4">

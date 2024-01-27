@@ -44,7 +44,7 @@ function Studentlist() {
       const handleDelete = async (id , name) => {
 
 
-        const conform = confirm("are you want to delect the value of", name)
+        const conform = window.confirm("are you want to delect the value of", name);
 
         if(conform)
         {
