@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { userconetxt } from '../context/Context'
@@ -13,7 +13,7 @@ function Navbars() {
   const {userdata ,coursedata , setuser} = useContext(userconetxt)
   const data = course.concat(coursedata)
   const navbarlistdata = data.filter((i) => i.name?.toLowerCase().startsWith(listdata.toLowerCase()) || i.Name?.toLowerCase().startsWith(listdata.toLowerCase()) );
-  const logoutAdmin = async () => {
+  const logoutuser = async () => {
     const storedToken = localStorage.getItem('token');
     alert("yes")
     if (storedToken) {
@@ -116,7 +116,7 @@ function Navbars() {
                 <Link to={'/stuentlogin'} className="text-blue-500 hover:text-blue-700  ">
                   Student
                 </Link>
-                <span onClick={logoutAdmin} className="text-blue-500 hover:text-blue-700">
+                <span onClick={logoutuser} className="text-blue-500 hover:text-blue-700">
                   Logout
                 </span>
                 <Link to={'/login'} className="text-blue-500 hover:text-blue-700">

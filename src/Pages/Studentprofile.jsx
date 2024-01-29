@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { userconetxt } from '../context/Context';
+import API_ENDPOINT from '../config';
+import { useNavigate } from 'react-router-dom';
 
 const StudentProfilePage = () => {
 
  const {kcistuentdata}= useContext(userconetxt)
-
-
-
-console.log("the data os ", kcistuentdata);
+ const navigate = useNavigate();
   const calculateExamSection = () => {
     const admissionDate = new Date(kcistuentdata.Admission_date);
     const courseDuration = 6; // Assuming the course duration is 6 months
@@ -18,6 +17,38 @@ console.log("the data os ", kcistuentdata);
 
     return daysLeft > 0 ? `Exam in ${daysLeft} days` : 'Exam already passed';
   };
+
+  const cheakstuent =async ()=>{
+    
+    const cheak = window.confirm("are you ant to logout")
+    if(cheak)
+    {
+
+    
+    const kcistuentdata = localStorage.getItem('kcistuent')
+
+    if(kcistuentdata)
+    {
+      try {
+        const response = await fetch(`${API_ENDPOINT}/logout`, {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          
+          localStorage.removeItem('kcistuent');
+          navigate('/');
+          
+        } else {
+          console.error('Failed to logout admin:', response.status, response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during admin logout:', error);
+      }
+    }
+  }
+  }
+
 
   return (
     <div className="flex flex-col items-center justify-center  p-28  min-h-screen bg-gray-200">
@@ -71,6 +102,9 @@ console.log("the data os ", kcistuentdata);
           </div>
           <div>
             <strong>Exam Section:</strong> {calculateExamSection()}
+          </div>
+          <div className=' bg-red-700 p-3 rounded-lg text-white' onClick={cheakstuent}>
+            Logout
           </div>
         </div>
       </div>
