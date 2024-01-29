@@ -158,6 +158,18 @@ const Logindata = async (event) => {
           >
             Register
           </Link>
+
+        </div>
+
+        <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+         if your an studnet of kci ?{" "}
+          <Link
+            className="text-red-600 hover:underline hover:underline-offset-4"
+            to={'/stuentlogin'}
+          >
+            Login with student
+          </Link>
+          
         </div>
       </div>
     </section>

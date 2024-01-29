@@ -4,13 +4,40 @@ import { Link } from 'react-router-dom'
 import { userconetxt } from '../context/Context'
 import {  IoMdSearch} from "react-icons/io";
 import course from '../Data/Course';
+import API_ENDPOINT from '../config';
 function Navbars() {
 
     const [opennav, setnav]=useState(false)
+    const [submenu , setsubmenu] = useState(false)
     const [listdata , setlistdata]= useState('')
-  const {userdata ,coursedata} = useContext(userconetxt)
+  const {userdata ,coursedata , setuser} = useContext(userconetxt)
   const data = course.concat(coursedata)
   const navbarlistdata = data.filter((i) => i.name?.toLowerCase().startsWith(listdata.toLowerCase()) || i.Name?.toLowerCase().startsWith(listdata.toLowerCase()) );
+  const logoutAdmin = async () => {
+    const storedToken = localStorage.getItem('token');
+    alert("yes")
+    if (storedToken) {
+      try {
+        const response = await fetch(`${API_ENDPOINT}/logout`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        });
+
+        if (response.ok) {
+          setuser(null);
+          localStorage.removeItem('token');
+
+          
+        } else {
+          console.error('Failed to logout admin:', response.status, response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during admin logout:', error);
+      }
+    }
+  };
 
   return (
  
@@ -32,7 +59,7 @@ function Navbars() {
       </div>
       <div
   id="navbar-image-and-text-1"
-  className={`hs-collapse overflow-hidden transition-all duration-300 basis-full grow lg:block z-50 ${opennav ? '' : 'hidden'}`}
+  className={`hs-collapse   transition-all duration-300 basis-full grow lg:block z-50 ${opennav ? '' : 'hidden'}`}
 >
         <div class="flex flex-col gap-1 mt-5 lg:flex-row lg:items-center sm:justify-end lg:mt-0 lg:ps-5  z-50">
           {
@@ -71,19 +98,53 @@ function Navbars() {
             )
           }
 
-      {
-  userdata && userdata.data?.Name ? (
-    <span className="font-medium text-white bg-blue-400 p-3 rounded-lg cursor-pointer">
-      {userdata.data.Name ==="Admin" ? <Link to={'/dashbord'}> Admin </Link> : <Link to={'/'}> { userdata.data.Name} </Link>  }
-    </span>
-  ) : (
-    <Link to={'login'} className="login bg-blue-600 text-white p-2 rounded-md cursor-pointer">
-      LOGIN
-    </Link>
-  )
-}
+     {userdata && userdata.data?.Name ? (
+        <span className={`font-medium text-white flex justify-start    items-center bg-blue-400    min-w-20 h-9 rounded-lg cursor-pointer `}>
+          {userdata.data.Name === "Admin" ? (
+            <Link to={'/dashbord'} className=' px-3'>Admin</Link>
+          ) : (
+            <span className=' relative'onClick={()=> setsubmenu((prev)=>!prev)}>
+              <span className='px-4'>
+              {userdata.data.Name}
+
+              </span>
+            
+
+
+            {userdata && userdata.data?.Name && (
+              <div className={`flex p-1  mt-4 flex-col  gap-3 bg-white shadow-xl  rounded-lg absolute top-3   left-0 min-w-20 ${submenu ? '' : 'hidden'}`}>
+                <Link to={'/stuentlogin'} className="text-blue-500 hover:text-blue-700  ">
+                  Student
+                </Link>
+                <span onClick={logoutAdmin} className="text-blue-500 hover:text-blue-700">
+                  Logout
+                </span>
+                <Link to={'/login'} className="text-blue-500 hover:text-blue-700">
+                  Login
+                </Link>
+                <Link to={'/'} className="text-blue-500 hover:text-blue-700">
+                  Home
+                </Link>
+              </div>
+            )}
+            </span>
+
+
+          )}
+        </span>
+      ) : (
+        <Link to={'/login'} className="login bg-blue-600 text-white p-2 rounded-md cursor-pointer">
+          LOGIN
+        </Link>
+      )}
+     
         </div>
       </div>
+
+
+
+
+      
       <form className={` flex w-full flex-col absolute top-16 left-0 lg:hidden ${opennav ? 'hidden' : ''} `}  >
 
 <div class="relative mb-4 flex w-full  items-stretch">

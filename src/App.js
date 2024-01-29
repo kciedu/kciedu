@@ -25,10 +25,13 @@ import StudentForm from './Dashbord/Pages/Student/StudentForm';
 import Teacherlist from './Dashbord/Pages/Teacher/Teacherlist';
 import Newteacher from './Dashbord/Pages/Teacher/Newteacher';
 import UpdateStudentForm from './Dashbord/Pages/Student/Updatefrom';
+import StudentDetails from './Dashbord/Pages/Student/Studentdetails';
+import Studentlogin from './Pages/Studentlogin';
+import StudentProfilePage from './Pages/Studentprofile';
 
 function App() {
 
-  const {user , username} = useContext(userconetxt)
+  const {user , username ,iskcistuentdata} = useContext(userconetxt)
 
   const route  = createBrowserRouter(createRoutesFromElements(
 <>    
@@ -43,6 +46,15 @@ function App() {
       <Route path='contact' element={<Contact></Contact>}></Route>
       <Route path='login' element={<Login></Login>}></Route>
       <Route path='signup' element={<Signup></Signup>}></Route>
+      <Route path='stuentlogin' element={<Studentlogin></Studentlogin>}></Route>
+      <Route path='stuentprofile' element={
+      <Protexted kcidata={iskcistuentdata}>
+
+      <StudentProfilePage></StudentProfilePage>
+      </Protexted>
+      
+      }></Route>
+      
       <Route path='details/:name' element={<Deatils></Deatils>}></Route>
       
     </Route>
@@ -54,6 +66,7 @@ function App() {
 
     <Route path='student' element={<Studentlist />} />
     <Route path='newstudent' element={<StudentForm />} />
+    <Route path='student/:studentId' element={<StudentDetails />} />
     <Route path='updatestudent/:studentId' element={< UpdateStudentForm />} />
 
     

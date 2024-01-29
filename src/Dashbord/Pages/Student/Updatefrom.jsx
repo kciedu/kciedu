@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import API_ENDPOINT from '../../../config';
+import { userconetxt } from '../../../context/Context';
+import course from '../../../Data/Course';
 
 const UpdateStudentForm = () => {
 
     const {studentId} = useParams(null)
+
+    const {coursedata}= useContext(userconetxt)
+    const data = course.concat(coursedata)
+    console.log("the value of data ", data);
 
 console.log("the value of ", studentId);
 
@@ -59,7 +65,8 @@ console.log("the value of ", studentId);
               postcode: studentData.Postcode,
               address: studentData.Address,
               Admissiondate: studentData.Admission_date,
-              Files: null,
+              Files: studentData.photo
+              ,
             });
           } else {
             console.error('Error fetching student data');
@@ -102,7 +109,7 @@ console.log("the value of ", studentId);
       formDataObj.append('postcode', formData.postcode);
       formDataObj.append('address', formData.address);
       formDataObj.append('Files', formData.Files);
-        console.log("the value of from data");
+        console.log("the value of from data", formData.Files);
       // Update student data using the provided studentId
       const response = await fetch(`${API_ENDPOINT}/updateStudent/${studentId}`, {
         method: 'PUT',
@@ -179,7 +186,7 @@ console.log("the value of ", studentId);
             </div>
           </div>
           <div>
-            <label htmlFor="course" className="block text-gray-800 font-bold mb-2">
+          <label htmlFor="course" className="block text-gray-800 font-bold mb-2">
               Course
             </label>
             <select
@@ -190,9 +197,13 @@ console.log("the value of ", studentId);
               onChange={handleChange}
             >
               <option value="">Select Course</option>
-              <option value="ms-word">MS Word</option>
-              <option value="excel">Excel</option>
-              <option value="web-design">Web Design</option>
+            {
+              data.map((i)=>
+              
+              
+              <option value={i?.name || i?.Name}>{i?.name || i?.Name}</option>
+              )
+            }
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -367,6 +378,7 @@ console.log("the value of ", studentId);
   id="File"
   name="Files"  // Change 'File' to 'Files' to match the state key
   className="w-full border border-gray-300 p-2 rounded-lg"
+
   onChange={handleChange}
 />
 </div>

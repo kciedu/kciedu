@@ -12,7 +12,13 @@ function Providerfunction({ children }) {
   const [loading, setLoading] = useState(true);
   const [coursedata , setcoursedata] = useState([])
   const [update, setupdate]= useState()
+  const [iskcistuentdata , setiskcistuentdata] = useState(false)
+  const [kcistuentdata, setkcistuentdata]=useState({})
   const [studentdata, setstudentdata]= useState()
+
+
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,8 +74,26 @@ function Providerfunction({ children }) {
     checkToken();
   }, [islogin ,user]);
 
+
+  useEffect(()=>{
+    const cheakstuent = async () => {
+      const storedToken = localStorage.getItem('kcistuent');
+
+      if( storedToken)
+      {
+        setlogin(true);
+        setiskcistuentdata(true)
+        setkcistuentdata(JSON.parse(storedToken))
+      }
+
+    }
+    cheakstuent()
+
+  },[islogin])
+
+
   return (
-    <userconetxt.Provider value={{ user, setuser, islogin, setlogin, userdata, username , setloginuserdata ,loginuserdata ,coursedata ,setupdate , setstudentdata , studentdata}}>
+    <userconetxt.Provider value={{ user, setuser, islogin, setlogin, userdata, username , setloginuserdata ,loginuserdata ,coursedata ,setupdate , setstudentdata , studentdata , setiskcistuentdata , iskcistuentdata ,kcistuentdata}}>
       {!loading && children}
     </userconetxt.Provider>
   );

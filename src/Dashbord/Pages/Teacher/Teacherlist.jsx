@@ -80,44 +80,7 @@ export default function Teacherlist() {
                             </tr>
                                 )
                             }
-
-{
-                              [1,2,3,4,5,7].map((item ,index)=>
-                                
-                            <tr key={index}>
-                                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">   { index}</p>
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <div class="flex items-center">
-                                        <div class="flex-shrink-0 w-10 h-10">
-                                            <img class="w-full h-full rounded-full"
-                                                src={item.Image}
-                                                alt="no image" />
-                                        </div>
-                                         
-                                        </div>
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">   {item.Name}</p>
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">
-                                      {item.Duration}
-                                    </p>
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">
-                                    ₹ {item.Fees}
-                                    </p>
-                                </td>
-                               
-                            </tr>
-                                )
-                            }
-
-                            
-                          
+             
                         </tbody>
                     </table>
              

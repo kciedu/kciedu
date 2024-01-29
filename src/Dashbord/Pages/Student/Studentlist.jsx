@@ -136,18 +136,18 @@ function Studentlist() {
             <tr>
               <th className="py-2 px-4 border-b border-gray-300">Photo</th>
               <th className="py-2 px-4 border-b border-gray-300">First Name</th>
-              {/* <th className="py-2 px-4 border-b border-gray-300">Last Name</th> */}
+           
               <th className="py-2 px-4 border-b border-gray-300">Course</th>
               <th className="py-2 px-4 border-b border-gray-300">Mobile Number</th>
-              <th className="py-2 px-4 border-b border-gray-300">Confirm Number</th>
-              <th className="py-2 px-4 border-b border-gray-300">Email</th>
-              <th className="py-2 px-4 border-b border-gray-300">D O B</th>
+   
               <th className="py-2 px-4 border-b border-gray-300">Gender</th>
               <th className="py-2 px-4 border-b border-gray-300">Student ID</th>
               <th className="py-2 px-4 border-b border-gray-300">Username</th>
+              <th className="py-2 px-4 border-b border-gray-300">Password</th>
               <th className="py-2 px-4 border-b border-gray-300">Status</th>
               <th className="py-2 px-4 border-b border-gray-300">Admission Date</th>
-              <th className="py-2 px-4 border-b border-gray-300">Password</th>
+              <th className="py-2 px-4 border-b border-gray-300">See profile</th>
+              
               <th className="py-2 px-4 border-b border-gray-300">Delete</th>
               <th className="py-2 px-4 border-b border-gray-300">Update</th>
             </tr>
@@ -160,17 +160,17 @@ function Studentlist() {
                 </td>
                 <td className="py-2 px-4">{student.firstname}</td>
                 {/* <td className="py-2 px-4">{student.lastname}</td> */}
-                <td className="py-2 px-4">{student.course}</td>
+                <td className="py-2 px-4 text-center">{student.course}</td>
                 <td className="py-2 px-4">{student.Mobilenumber}</td>
-                <td className="py-2 px-4">{student.confirmnumber}</td>
-                <td className="py-2 px-4">{student.Email}</td>
-                <td className="py-2 px-6">{student.Date_of_brith}</td>
+               
                 <td className="py-2 px-4">{student.Gender}</td>
                 <td className="py-2 px-4">{student.StudentID}</td>
                 <td className="py-2 px-4">{student.username}</td>
-                <td className="py-2 px-4">{student.Status ? 'Active' : 'Inactive'}</td>
-                <td className="py-2 px-4">{student.Admission_date}</td>
                 <td className="py-2 px-4">{student.password}</td>
+                <td className={`py-2 px-4 ${student.Status ?" bg-green-400 text-white" :" ring-deep-orange-500"} `}>{student.Status ? 'Active' : 'Inactive'}</td>
+                <td className="py-2 px-4">{student.Admission_date}</td>
+                <td className="py-2 px-4   bg-blue-800 text-white"> <Link to={`/dashbord/student/${student._id}`}>See Profile</Link></td>
+                
                 <td className="py-2 px-4 p-1 bg-red-600">
                   <button onClick={() => handleDelete(student._id, student.firstname)} className='text-white' >Delete</button>
                 </td>
