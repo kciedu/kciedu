@@ -14,15 +14,16 @@ function Cards({name, des ,src ,details ,flag=true,pdf}) {
   return (
    
 
-    <Card className="w-full max-w-[26rem] shadow-lg max-h-96 cursor-pointer transform transition-transform hover:scale-105 hover:-translate-y-2">
-      <CardHeader floated={false} color="blue-gray" className="max-h-36 relative">
+    <Card className=" w-[300px] shadow-lg max-h-96 cursor-pointer transform transition-transform hover:scale-105 hover:-translate-y-2">
+      <CardHeader floated={false} color="blue-gray" className="  relative rounded-none">
       <img
     src={src}
     alt="ui/ux review check"
     width="100%"
-    className="object-cover w-full h-36"
+    className="object-cover "
   />
-        <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
+        <div 
+        className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
         
       </CardHeader>
       <CardBody>
@@ -49,10 +50,10 @@ function Cards({name, des ,src ,details ,flag=true,pdf}) {
             5.0
           </Typography>
         </div>
-        <Typography color="gray" className=' break-words  text-start'>
+        <Typography color="gray" className=' break-words  text-start text-sm'>
           
           
-          {des ? "Address:"+des: details}
+          {des ? des: details}
         </Typography>
         
       </CardBody>

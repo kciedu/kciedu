@@ -28,6 +28,8 @@ import UpdateStudentForm from './Dashbord/Pages/Student/Updatefrom';
 import StudentDetails from './Dashbord/Pages/Student/Studentdetails';
 import Studentlogin from './Pages/Studentlogin';
 import StudentProfilePage from './Pages/Studentprofile';
+import Paymentform from './Dashbord/Pages/Paymentdatas/Paymentform';
+import Paymentlist from './Dashbord/Pages/Paymentdatas/Paymentlist';
 
 function App() {
 
@@ -65,12 +67,15 @@ function App() {
     <Route path='Loginstudent' element={<Loginstudent />} /> 
 
     <Route path='student' element={<Studentlist />} />
+    
     <Route path='newstudent' element={<StudentForm />} />
     <Route path='student/:studentId' element={<StudentDetails />} />
     <Route path='updatestudent/:studentId' element={< UpdateStudentForm />} />
 
+    <Route path='payment' element={<Paymentform></Paymentform>}></Route>
+    <Route path='feereceipt' element={<Paymentlist></Paymentlist>}></Route>
     
-    <Route path='teacher' element={<Teacherlist />} />
+    <Route path='staff' element={<Teacherlist />} />
     <Route path='newteacher' element={<Newteacher />} />
     <Route path='course' element={<Courselist />} />
     <Route path='newcourse' element={<Addcourse />} />

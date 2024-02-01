@@ -1,64 +1,15 @@
 const course = [
-    {
-        id: 1,
-        name: "python",
-        des :"this good For ai , Ml backend of web ",
-        src:"https://www.python.org/static/community_logos/python-logo-master-v3-TM.png",
-        duration: "3 months",
-        data:require('../assests/text.pdf'),
-        amount : 5000,
+    // {
+    //     id: 1,
+    //     name: "python",
+    //     des: "this good For ai , Ml backend of web ",
+    //     src: "https://www.python.org/static/community_logos/python-logo-master-v3-TM.png",
+    //     duration: "3 months",
+    //     data: require('../assests/text.pdf'),
+    //     amount: 5000,
 
-    },
-
-    {
-        id: 2,
-        name: "Java",
-        des :"this good Netwroking and application",
-        src:"https://1000logos.net/wp-content/uploads/2020/09/Java-Logo.png",
-        duration: "6 months",
-        data:require('../assests/text.pdf'),
-        amount : 4000,
-    },
-    
-    {
-        id: 3,
-        name: "Web-development",
-        des :"this good fro fornt end Backend",
-        src:"https://miro.medium.com/v2/resize:fit:1200/1*V-Jp13LvtVc2IiY2fp4qYw.jpeg",
-        duration: "10 months",
-        data:require('../assests/text.pdf'),
-        amount : 15000,
-    },
-    
-    {
-        id: 4,
-        name: "Web-Desgining",
-        des :"this good fro fornt ",
-        src:"https://miro.medium.com/v2/resize:fit:1358/0*4DpFVUP_VfkhzSIL",
-        duration: "6 months",
-        data:require('../assests/text.pdf'),
-        amount : 10000,
-    },
-    
-    {
-        id: 5,
-        name: "Forent-Devlopmenr",
-        des :"this good fro fornt end desginging and testing",
-        src:"https://images.ctfassets.net/h6luvadnbip0/2PYqqgMelLWfBiyL0k40ew/0de3593a88c76b1175d5ec5eed270b88/Gruppe_3447.png",
-        duration: "5 months",
-        data:require('../assests/text.pdf'),
-        amount : 8000,
-    },
-    {
-        id: 6,
-        name: "Backend-Devlopmenr",
-        des :"this good fro Back end desginging and testing",
-        src:"https://training-blog-uploads.internshala.com/blog/wp-content/uploads/2023/03/backend-developer-.jpg.webp",
-        duration: "7 months",
-        data:require('../assests/text.pdf'),
-        amount : 12000,
-    },
-    
+    // },
+    {id:1,name:"Python",des:"Python learning benefits: versatile, readable syntax, extensive libraries, AI, data science, automation, web development, job opportunities, and community support.",src:require("../assests/python.png"),duration:"6 Month",amount:"12000",},{id:2,name:"Javascript",des:"JavaScript learning benefits include enhanced web development skills, dynamic and interactive web pages, career opportunities, and versatile programming capabilities for diverse projects.",src:require("../assests/javascript.png"),duration:"6 Month",amount:"12000",},{id:3,name:"Web Design",des:"Web designing learning benefits: creativity, UI/UX skills, responsive layouts, visual aesthetics, career opportunities, and the ability to bring ideas to life online.",src:require("../assests/webdesign.jpg"),duration:"6 Month",amount:"12000",},{id:4,name:"React",des:"React learning benefits: efficient UI development, component-based architecture, virtual DOM, enhanced performance, and wide industry adoption for building interactive, scalable web applications.",src:require("../assests/react.png"),duration:"6 Month",amount:"12000",},{id:5,name:"HTML",des:"HTML learning benefits: foundational web development, structure creation, content presentation, browser compatibility, and essential skill for building websites and applications.",src:require("../assests/html.png"),duration:"6 Month",amount:"12000",},{id:6,name:"CSS",des:"CSS learning benefits: styling expertise, responsive design skills, layout control, visual appeal mastery, and crucial knowledge for crafting attractive, modern websites.",src:require("../assests/css.png"),duration:"6 Month",amount:"12000",},
 
 
 ]

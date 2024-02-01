@@ -12,6 +12,7 @@ const Addcourse = () => {
   
     const handleImageChange = (e) => {
       setImage(e.target.files[0]);
+  
     };
   
     const handlePdfChange = (e) => {
@@ -23,6 +24,7 @@ const Addcourse = () => {
   
       try {
         const formData = new FormData();
+
         formData.append('courseName', courseName);
         formData.append('fees', fees);
         formData.append('duration', duration);
@@ -36,6 +38,7 @@ const Addcourse = () => {
           },
           body: formData,
         });
+        console.log("the ", formData);
   
         if (response.ok) {
           alert("Success full");

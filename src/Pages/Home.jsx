@@ -53,13 +53,9 @@ function Home() {
 
   useEffect(() => {
     const updateSlidesPerView = () => {
-      if (window.innerWidth >= 1200) {
-        setSlidesPerView(5);
-      } else if (window.innerWidth >= 992) {
-        setSlidesPerView(4);
-      } else if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 800) {
         setSlidesPerView(3);
-      } else if (window.innerWidth >= 576) {
+      } else if (window.innerWidth >= 600) {
         setSlidesPerView(2);
       } else {
         setSlidesPerView(1);
@@ -112,7 +108,7 @@ function Home() {
         <div className="mt-4">
           <Swiper
             slidesPerView={slidesPerView}
-            spaceBetween={30}
+            spaceBetween={150}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,

@@ -8,7 +8,6 @@ const StudentForm = () => {
 
   const {coursedata}= useContext(userconetxt)
   const data = course.concat(coursedata)
-  console.log("the value of data ", data);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -42,7 +41,6 @@ const StudentForm = () => {
     try {
       const formDataObj = new FormData();
   
-      // Append each form field to the FormData object
       formDataObj.append('firstName', formData.firstName);
       formDataObj.append('lastName', formData.lastName);
       formDataObj.append('course', formData.course);
