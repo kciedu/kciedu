@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Paymenthistory from './Paymenthistory';
+
 import API_ENDPOINT from '../../../config';
 
 const Paymentform = () => {
 
 
+  const [paymentHistory, setPaymentHistory] = useState([])
     const [formData, setFormData] = useState({
         studentId: '',
         studentName: '',
@@ -18,6 +19,7 @@ const Paymentform = () => {
       });
     
 
+     
       useEffect(() => {
         const fetchStudentData = async () => {
           try {
@@ -28,17 +30,18 @@ const Paymentform = () => {
                   'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
               });
-    
+        
               if (response.ok) {
                 const studentData = await response.json();
                 // Update form fields with the retrieved student data
-
+                setPaymentHistory(studentData.paymentsData || [])
                 setFormData((prevFormData) => ({
                   ...prevFormData,
                   studentName: studentData.data.firstname,
-                  selectCourse : studentData.data.course // Assuming 'firstname' is the field in student data
-                  // Update other fields as needed
+                  selectCourse: studentData.data.course,
                 }));
+        
+                // Set payment history using the paymentsData property of studentData
               } else {
                 console.error('Failed to fetch student data');
               }
@@ -47,11 +50,16 @@ const Paymentform = () => {
             console.error('Error:', error);
           }
         };
+        
     
         fetchStudentData();
+            
+    
+    
+
       }, [formData.studentId]);
 
-
+   
       // Function to handle form input changes
       const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -95,43 +103,49 @@ const response = await fetch(`${API_ENDPOINT}/payments`, {
           console.error('Error:', error);
         }
       };
-      
-
-
-      const [paymentHistory, setPaymentHistory] = useState([]);
-
+  
       useEffect(() => {
-        const fetchData = async () => {
-          const storedToken = localStorage.getItem('token');
-          if (storedToken) {
-            try {
-              const response = await fetch(`${API_ENDPOINT}/payments/${formData.studentId}`, {
+        const fetchStudentData = async () => {
+          try {
+            if (formData.studentId !== '') {
+              const response = await fetch(`${API_ENDPOINT}/getStudents/${formData.studentId}`, {
+                method: 'GET',
                 headers: {
-                  Authorization: `Bearer ${storedToken}`,
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
               });
-    
+      
               if (response.ok) {
-                const data = await response.json();
-              
-                setPaymentHistory(data);
+                const studentData = await response.json();
+                // Update form fields with the retrieved student data
+                setFormData((prevFormData) => ({
+                  ...prevFormData,
+                  studentName: studentData.data.firstname,
+                  selectCourse: studentData.data.course,
+                }));
+      
+                // Set payment history using the paymentsData property of studentData
+                const paymentsData = studentData.paymentsData || {};
+               
+      
+                setPaymentHistory(paymentsData);
               } else {
-                console.log("Error: Something went wrong");
+                console.error('Failed to fetch student data');
               }
-            } catch (error) {
-              console.error("Error fetching student data:", error);
             }
+          } catch (error) {
+            console.error('Error:', error);
           }
         };
-        
-        fetchData();
-      }, []);
       
+        fetchStudentData();
+      }, [formData.studentId]);
       
-      console.log("the data o fpayt", paymentHistory);
-    
+  
 
+      console.log('Payment history data:', paymentHistory);
 
+console.log('Payment history length:', paymentHistory?.length);
 
   return (
     <div className=" grid  grid-cols-1 lg:grid-cols-2 p-10 gap-4 min-h-screen bg-gray-200">
@@ -293,7 +307,40 @@ const response = await fetch(`${API_ENDPOINT}/payments`, {
       </div>
       <div className=''>
 
-      <Paymenthistory Paymenthistory={paymentHistory}></Paymenthistory>
+      <div className="min-h-screen bg-gray-100 overflow-scroll">
+      <h1 className="text-3xl font-bold mb-4">Payment History</h1>
+      <table className="min-w-full bg-white border border-gray-300">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 border-b border-gray-300 font-bold" colSpan={2}>Date</th>
+            <th className="py-2 px-4 border-b border-gray-300 font-bold">Course Name</th>
+            <th className="py-2 px-4 border-b border-gray-300 font-bold">Total Course Fees</th>
+            <th className="py-2 px-4 border-b border-gray-300 font-bold">Fees Paid</th>
+            <th className="py-2 px-4 border-b border-gray-300 font-bold">Fees Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+        {paymentHistory !== null && paymentHistory?.length > 0 ? (
+  paymentHistory.map((payment, index) => (
+    <tr key={index}>
+      <td className="py-2 px-4 border-b border-gray-300" colSpan={2}>
+        {new Date(payment.createdAt).toLocaleDateString()}
+      </td>
+      <td className="py-2 px-4 border-b border-gray-300">{payment.selectCourse}</td>
+      <td className="py-2 px-4 border-b border-gray-300">{payment.totalAmount}</td>
+      <td className="py-2 px-4 border-b border-gray-300">{payment.paymentAmount}</td>
+      <td className="py-2 px-4 border-b border-gray-300">{payment.totalBalance}</td>
+    </tr>
+  ))
+) : (
+  <tr>
+    <td colSpan={6}>No payment history available</td>
+  </tr>
+)}
+
+        </tbody>
+      </table>
+    </div>
       </div>
     </div>
   );

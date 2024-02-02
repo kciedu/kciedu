@@ -1,29 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import API_ENDPOINT from '../../../config';
 
 const Paymentlist = () => {
-  const data = [
-    {
-      studentId: '123',
-      name: 'John Doe',
-      course: 'Computer Science',
-      receiptNumber: 'R123',
-      receiptDate: '2022-01-01',
-      fees: 5000,
-      paymentMode: 'Cash',
-    },
-    {
-      studentId: '456',
-      name: 'Jane Smith',
-      course: 'Business Administration',
-      receiptNumber: 'R456',
-      receiptDate: '2022-01-02',
-      fees: 6000,
-      paymentMode: 'Credit Card',
-    },
-    // Add more data objects as needed
-  ];
+ 
+  const [data, setdata] = useState([])
 
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      try {
+        
+          const response = await fetch(`${API_ENDPOINT}/allpaymentreceipt`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+    
+          if (response.ok) {
+            const studentData = await response.json();
+            // Update form fields with the retrieved student data
+           setdata(studentData.data)
+            console.log("aghdaghdasdhghasd asfhvghsdafsdf",studentData.data );
+            // Set payment history using the paymentsData property of studentData
+          
+          } else {
+            console.error('Failed to fetch student data');
+          }
+       
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    
 
+    fetchStudentData();
+  }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Adjust the format as needed
+  };
+
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString(); // Adjust the format as needed
+  };
 
   
   return (
@@ -65,22 +86,25 @@ const Paymentlist = () => {
             <th className="py-3 px-6 bg-gray-200 font-bold uppercase text-sm text-gray-600">Course</th>
             <th className="py-3 px-6 bg-gray-200 font-bold uppercase text-sm text-gray-600">Receipt Number</th>
             <th className="py-3 px-6 bg-gray-200 font-bold uppercase text-sm text-gray-600">Receipt Date</th>
+            <th className="py-3 px-6 bg-gray-200 font-bold uppercase text-sm text-gray-600">Receipt time</th>
+            
             <th className="py-3 px-6 bg-gray-200 font-bold uppercase text-sm text-gray-600">Fees</th>
             <th className="py-3 px-6 bg-gray-200 font-bold uppercase text-sm text-gray-600">Payment Mode</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+            <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} data-title={item.note}>
               <td className="py-4 px-6 border-b border-gray-300">
                 <button className="text-blue-500">Edit</button>
               </td>
               <td className="py-4 px-6 border-b border-gray-300">{item.studentId}</td>
-              <td className="py-4 px-6 border-b border-gray-300">{item.name}</td>
-              <td className="py-4 px-6 border-b border-gray-300">{item.course}</td>
-              <td className="py-4 px-6 border-b border-gray-300">{item.receiptNumber}</td>
-              <td className="py-4 px-6 border-b border-gray-300">{item.receiptDate}</td>
-              <td className="py-4 px-6 border-b border-gray-300">{item.fees}</td>
+              <td className="py-4 px-6 border-b border-gray-300">{item.studentName}</td>
+              <td className="py-4 px-6 border-b border-gray-300">{item.selectCourse}</td>
+              <td className="py-4 px-6 border-b border-gray-300">{item.receiptNo}</td>
+              <td className="py-4 px-6 border-b border-gray-300">{formatDate(item.createdAt)}</td>
+              <td className="py-4 px-6 border-b border-gray-300">{formatTime(item.createdAt)}</td>
+              <td className="py-4 px-6 border-b border-gray-300">{item.paymentAmount}</td>
               <td className="py-4 px-6 border-b border-gray-300">{item.paymentMode}</td>
             </tr>
           ))}
