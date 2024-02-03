@@ -2,12 +2,42 @@ import { Link } from "react-router-dom"
 import course from "../../../Data/Course"
 import { userconetxt } from "../../../context/Context"
 import { useContext } from "react"
+import API_ENDPOINT from "../../../config"
 
 export default function Courselist() {
 
   
-const {coursedata} = useContext(userconetxt)
+const {coursedata , setupdate} = useContext(userconetxt)
 const totalnumber = coursedata.length+ course.length
+
+
+ const deletedata = async (id, name) => {
+    const conform = window.confirm("are you want to delete the value of", name);
+
+    if (conform) {
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        try {
+          const response = await fetch(`${API_ENDPOINT}/deletecourse/${id}`, {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          });
+
+          if (response.ok) {
+            // Remove the deleted student from the state
+            setupdate(true)
+            alert("sucess fully")
+          } else {
+            console.log("Error: Something went wrong");
+          }
+        } catch (error) {
+          console.error("Error deleting student:", error);
+        }
+      }
+    }
+  };
 
   return (
     <div class="bg-white p-8 rounded-md w-full">
@@ -140,7 +170,9 @@ const totalnumber = coursedata.length+ course.length
                                    See
                                     </p>
                                 </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-red-600 text-sm">
+
+                                <td class="px-5 py-5 border-b border-gray-200 bg-red-600 text-sm" onClick={()=>deletedata(item._id)}>
+                                
                                     <p class="text-white  whitespace-no-wrap">
                                    Delect
                                     </p>

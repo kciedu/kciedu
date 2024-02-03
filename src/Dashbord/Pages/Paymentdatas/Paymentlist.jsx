@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import API_ENDPOINT from '../../../config';
+import { Link } from 'react-router-dom';
 
 const Paymentlist = () => {
  
@@ -68,8 +69,7 @@ const Paymentlist = () => {
             name=""
             id=""
             placeholder="Search..."
-            // value={searchTerm}
-            // onChange={(e)=> setSearchTerm(e.target.value)}
+         
           />
         </div>
       </form>
@@ -96,7 +96,10 @@ const Paymentlist = () => {
           {data.map((item, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} data-title={item.note}>
               <td className="py-4 px-6 border-b border-gray-300">
+                <Link to={`/dashbord/paymentupdate/${item._id
+}`}>
                 <button className="text-blue-500">Edit</button>
+                </Link>
               </td>
               <td className="py-4 px-6 border-b border-gray-300">{item.studentId}</td>
               <td className="py-4 px-6 border-b border-gray-300">{item.studentName}</td>

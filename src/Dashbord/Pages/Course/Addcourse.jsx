@@ -7,6 +7,7 @@ const Addcourse = () => {
     const [courseName, setCourseName] = useState('');
     const [fees, setFees] = useState('');
     const [duration, setDuration] = useState('');
+   const  [Descriptions, setDescriptions] = useState('')
     const [image, setImage] = useState(null);
     const [pdf, setPdf] = useState(null);
   
@@ -28,8 +29,10 @@ const Addcourse = () => {
         formData.append('courseName', courseName);
         formData.append('fees', fees);
         formData.append('duration', duration);
-        formData.append('image', image, image.name);
-        formData.append('pdf', pdf, pdf.name);
+        formData.append('Descriptions', Descriptions);
+        
+        formData.append('image', image); // Ensure 'image' is the field name
+    formData.append('pdf', pdf); 
   
         const response = await fetch(`${API_ENDPOINT}/course`, {
           method: 'POST',
@@ -38,7 +41,7 @@ const Addcourse = () => {
           },
           body: formData,
         });
-        console.log("the ", formData);
+       
   
         if (response.ok) {
           alert("Success full");
@@ -100,6 +103,23 @@ const Addcourse = () => {
               placeholder="Enter course duration"
             />
           </div>
+          <div>
+            <label htmlFor="Descriptions" className="block text-gray-800 font-bold mb-2">
+              Descriptions
+            </label>
+            <textarea
+              
+              id="Descriptions"
+              name="Descriptions"
+              value={Descriptions}
+              onChange={(e) => setDescriptions(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded-lg"
+              placeholder="Enter course duration"
+            />
+          </div>
+
+
+
           <div>
             <label htmlFor="image" className="block text-gray-800 font-bold mb-2">
               Image
