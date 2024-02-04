@@ -82,8 +82,8 @@ function Navbars() {
                 },
                 {
                   id:4,
-                  name:"Placement",
-                  path:'placement',
+                  name:"Career",
+                  path:'career',
               },
               {
                 id:5,

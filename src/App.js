@@ -31,6 +31,8 @@ import StudentProfilePage from './Pages/Studentprofile';
 import Paymentform from './Dashbord/Pages/Paymentdatas/Paymentform';
 import Paymentlist from './Dashbord/Pages/Paymentdatas/Paymentlist';
 import Paymentupdatefrom from './Dashbord/Pages/Paymentdatas/Paymentupdatefrom';
+import Placement from './Dashbord/Pages/Placemant/Placement';
+import Career from './Pages/Career';
 
 function App() {
 
@@ -47,8 +49,10 @@ function App() {
       
       <Route path='course' element={<Course></Course>}></Route>
       <Route path='contact' element={<Contact></Contact>}></Route>
+      <Route path='career' element={<Career></Career>}></Route>
       <Route path='login' element={<Login></Login>}></Route>
       <Route path='signup' element={<Signup></Signup>}></Route>
+      
       <Route path='stuentlogin' element={<Studentlogin></Studentlogin>}></Route>
       <Route path='stuentprofile' element={
       <Protexted kcidata={iskcistuentdata}>
@@ -82,6 +86,9 @@ function App() {
     <Route path='newteacher' element={<Newteacher />} />
     <Route path='course' element={<Courselist />} />
     <Route path='newcourse' element={<Addcourse />} />
+    <Route path='placement' element={<Placement />} />
+
+
     <Route path='logout' element={<Massage />} />
   </Route>
 </Route>

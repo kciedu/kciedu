@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-import {useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { FaArrowRight } from "react-icons/fa";
 function DashbordHeader() {
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -86,11 +86,11 @@ function DashbordHeader() {
 
                               <span class="text-base text-gray-900 font-semibold cursor-pointer  rounded-lg flex items-center p-2 hover:bg-gray-100 group relative">
 
-                                 <span class="ml-3 flex justify-between items-center w-full" onClick={() => setstuentsubmenu(!stuentsubmenu)}>Students 
-                                 <span className={` ${stuentsubmenu ? "rotate-90  " : " "} `}>
-                                    <FaArrowRight></FaArrowRight>
-                                    </span> 
+                                 <span class="ml-3 flex justify-between items-center w-full" onClick={() => setstuentsubmenu(!stuentsubmenu)}>Students
+                                    <span className={` ${stuentsubmenu ? "rotate-90  " : " "} `}>
+                                       <FaArrowRight></FaArrowRight>
                                     </span>
+                                 </span>
 
 
                               </span>
@@ -181,11 +181,11 @@ function DashbordHeader() {
 
                               <span class="text-base text-gray-900 font-semibold cursor-pointer  rounded-lg flex items-center p-2 hover:bg-gray-100 group relative">
 
-                                 <span class="ml-3 w-full flex items-center justify-between" onClick={() => setexamsubmenu(!examsubmenu)} >{'Exams'} 
-                                 
-                                 <span className={` ${examsubmenu ? "rotate-90  " : " "} `}>
-                                    <FaArrowRight></FaArrowRight>
-                                    </span> 
+                                 <span class="ml-3 w-full flex items-center justify-between" onClick={() => setexamsubmenu(!examsubmenu)} >{'Exams'}
+
+                                    <span className={` ${examsubmenu ? "rotate-90  " : " "} `}>
+                                       <FaArrowRight></FaArrowRight>
+                                    </span>
                                  </span>
 
 
@@ -245,6 +245,14 @@ function DashbordHeader() {
 
                            </li>
 
+                           <li>
+
+                              <Link to={"placement"} class="text-base text-gray-900 font-semibold cursor-pointer  rounded-lg flex items-center p-2 hover:bg-gray-100 group">
+
+                                 <span class="ml-3">{'Placement '}</span>
+                              </Link>
+
+                           </li>
                            <li>
 
                               <Link to={"certificates"} class="text-base text-gray-900 font-semibold cursor-pointer  rounded-lg flex items-center p-2 hover:bg-gray-100 group">
