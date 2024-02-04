@@ -2,7 +2,7 @@ import React from 'react'
 
 function Heroslider({name,describe,src,num1,num2,other,other2}) {
   return (
-    <section class="pt-12 pb-12 sm:pb-16 lg:pt-8 max-h-screen mt-10">
+    <section class="pt-12 pb-12 sm:pb-16 lg:pt-8  h-screen max-h-screen mt-10 box-border">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative">
             <div class="grid max-w-lg grid-cols-1 mx-auto lg:max-w-full lg:items-center lg:grid-cols-2 gap-y-12 lg:gap-x-16">
                 <div>

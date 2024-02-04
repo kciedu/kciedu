@@ -14,26 +14,28 @@ function Cards({name, des ,src ,details ,flag=true,pdf}) {
   return (
    
 
-    <Card className=" w-[300px] shadow-lg max-h-96 cursor-pointer transform transition-transform hover:scale-105 hover:-translate-y-2">
-      <CardHeader floated={false} color="blue-gray" className="  relative rounded-none">
+    <Card className=" max-w-[300px] shadow-lg cursor-pointer transform transition-transform hover:scale-105 hover:-translate-y-2">
+      <div className='  flex justify-center items-center h-[150px]'>
+
+      <CardHeader floated={false} color="blue-gray" className="  relative rounded-none   max-w-[120px] object-cover  ">
       <img
     src={src}
     alt="ui/ux review check"
-    width="100%"
-    className="object-cover "
-  />
+    className=' min-h-[100px]'
+    />
         <div 
         className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
         
       </CardHeader>
+      </div>
       <CardBody>
-        <div className="mb-3 flex items-center justify-between">
+        <div className="mb-3 flex items-center justify-between flex-wrap">
           <Typography variant="h5" color="blue-gray" className="font-medium">
             {name}
           </Typography>
           <Typography
             color="blue-gray"
-            className="flex items-center gap-1.5 font-normal"
+            className="flex items-center gap-1.5 font-normal  break-words "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,14 +52,14 @@ function Cards({name, des ,src ,details ,flag=true,pdf}) {
             5.0
           </Typography>
         </div>
-        <Typography color="gray" className=' break-words  text-start text-sm'>
+        <Typography color="gray" className='  flex-wrap text-start text-sm relative h-16  '>
           
           
-          {des ? des: details}
+        {des ? (des.length > 100 ? des.slice(0, 105) + "..." : des) : details}
         </Typography>
         
       </CardBody>
-      <CardFooter className="pt-3">
+      <CardFooter className="pt-3  bg-white   ">
       {
         flag ? <Link to={`/details/${name}`}>
           <Button size="lg" fullWidth={true}>

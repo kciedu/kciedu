@@ -2,20 +2,20 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Select, Option } from "@material-tailwind/react";
 import Hero from '../components/Hero';
 import Cards from '../components/Card';
-
-import Navbars from '../components/Navbar';
 import course from '../Data/Course';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '../App.css';
 import { Autoplay } from 'swiper/modules';
-import { Footer } from './Footer';
 import Deatilsheader from '../components/Deatilsheader';
 import { Link } from 'react-router-dom';
 import Roadmap from '../components/Roadmap';
 import Conatctmenu from '../components/Conatctmenu';
 import { userconetxt } from '../context/Context';
+import Detailslider from '../components/Detailslider';
+import Kcigrowth from '../components/Kcigrowth';
+import Reviews from '../components/Reviews';
 
 function Home() {
   const [slidesPerView, setSlidesPerView] = useState(1);
@@ -53,11 +53,17 @@ function Home() {
 
   useEffect(() => {
     const updateSlidesPerView = () => {
-      if (window.innerWidth >= 800) {
+      if (window.innerWidth >= 1200) {
+        setSlidesPerView(4);
+      } 
+      else if (window.innerWidth >= 800) {
         setSlidesPerView(3);
-      } else if (window.innerWidth >= 600) {
-        setSlidesPerView(2);
-      } else {
+      }
+       else if (window.innerWidth >= 600) {
+          setSlidesPerView(2);
+        }
+      
+      else {
         setSlidesPerView(1);
       }
     };
@@ -77,17 +83,18 @@ function Home() {
     <Conatctmenu></Conatctmenu>
       <Hero />
     <Deatilsheader></Deatilsheader>
+    <Detailslider></Detailslider>
       <section className='top programs'>
         <h2 className="text-4xl p-10 font-bold ">Explore Top Programs</h2>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-10 place-items-center	'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-10 place-items-center 	'>
           {data.map((i) =>
-          <Link to={`/details/${i?.name || i?.Name}`} className='flex items-center shadow-lg min-w-full bg-gray-50 rounded-lg '>
+          <Link to={`/details/${i?.name || i?.Name}`} className='flex items-center shadow-lg min-w-full bg-gray-50 rounded-lg max-h-12 '>
            
 
-              <div className="w-20">
-                <img src={i?.src || i?.Image}alt={i?.name || i?.Name} className=' max-h-12 object-cover' />
+              <div className="max-w-16 ">
+                <img src={i?.src || i?.Image}alt={i?.name || i?.Name} className='max-h-12 '  />
               </div>
-              <p className="p-5" >{i?.name || i?.Name}</p>
+              <p className="px-6" >{i?.name || i?.Name}</p>
            
           </Link>
           )}
@@ -108,7 +115,7 @@ function Home() {
         <div className="mt-4">
           <Swiper
             slidesPerView={slidesPerView}
-            spaceBetween={150}
+            spaceBetween={30}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
@@ -127,6 +134,15 @@ function Home() {
       </section>
 
 <Roadmap></Roadmap>
+
+<Reviews></Reviews>
+
+<Kcigrowth></Kcigrowth>
+
+
+
+
+
 
       <section className='Find Best Course p-10'>
         <h2 className="text-4xl font-bold">Find Best course</h2>

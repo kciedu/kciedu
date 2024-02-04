@@ -42,7 +42,7 @@ function Navbars() {
   return (
  
     <header class="flex flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full bg-white text-sm  dark:bg-gray-800 fixed left-0 right-0 top-0   ">
-    <nav class="max-w-[85rem] w-full mx-auto  lg:flex lg:items-center lg:justify-between shadow-sm p-4 px-10 pb-5" aria-label="Global">
+    <nav class=" w-full mx-auto  lg:flex lg:items-center lg:justify-between shadow-sm p-4 px-10 pb-5" aria-label="Global">
       <div class="flex items-center justify-between">
         <Link class="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" to={'/'}>
         

@@ -4,6 +4,33 @@ import { userconetxt } from '../context/Context'
 function Conatctmenu() {
     const [opennav, setnav]=useState(false)
     const {islogin} = useContext(userconetxt)
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      // Fetch WhatsApp API or use a third-party service to send the form data
+      const formData = new FormData(event.target);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const phone = formData.get('phone');
+      const course = formData.get('course');
+      const center = formData.get('center');
+  
+      const message = `
+        New Scholarship Application:
+        Name: ${name}
+        Email: ${email}
+        Phone: ${phone}
+        Course: ${course}
+        Center: ${center}
+      `;
+  
+      // Replace the following URL with the actual WhatsApp API endpoint
+      const whatsappApiUrl = 'https://api.whatsapp.com/send?phone=7217605495&text=' + encodeURIComponent(message);
+  
+      // Open WhatsApp link
+      window.open(whatsappApiUrl, '_blank');
+    };
+  
   return (
     <>
         <div id="login-popup" tabindex="-1"
@@ -11,11 +38,10 @@ function Conatctmenu() {
     
 
     >
-    <div class="relative p-4 w-full md:max-w-md  sm:max-w-80 h-full md:h-auto ">
-        <div class="relative bg-white rounded-lg shadow">
+    <div class="relative p-4 w-full max-h-[500px] md:max-w-[80%]  sm:max-w-[90%] h-full md:h-auto  grid grid-cols-2  bg-gray-50 rounded-lg shadow-inner">
             <button type="button"
         onClick={()=> setnav(true)}  
-              class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"><svg
+              class="absolute z-50 top-3 right-4 bg-red-600  text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"><svg
                     aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -24,6 +50,14 @@ function Conatctmenu() {
                 </svg>
                 <span class="sr-only">Close popup</span>
             </button>
+        <div className=' bg-red-300 w-full  object-cover'>
+            <img src="https://www.cssscript.com/wp-content/uploads/2023/08/Build-Beautiful-AI-Apps-With-the-LangUI-Tailwind-Library.webp" alt="" className=' w-full 
+            h-[450px]
+             object-cover
+            ' />            
+        </div>
+
+        <div class="relative bg-white rounded-lg shadow">
 
             <div class="p-5">
                 <h3 class="text-2xl mb-0.5 font-medium"></h3>
@@ -31,54 +65,100 @@ function Conatctmenu() {
 
                 <div class="text-center">
                     <p class="mb-3 text-2xl font-semibold leading-5 text-slate-900">
-                        Login to your account
+                       Apply to get scholaship upto 80%
                     </p>
-                    <p class="mt-2 text-sm leading-4 text-slate-600">
-                        You must be logged in to perform this action.
-                    </p>
+               
                 </div>
 
-                <div class="mt-7 flex flex-col gap-2">
-
-             
-                    <button
-                        class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"><img
-                            src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"
-                            class="h-[18px] w-[18px] "/>Continue with
-                        Google
-                    </button>
-
-                </div>
-
-                <div class="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
-                    <div class="h-px w-full bg-slate-200"></div>
-                    OR
-                    <div class="h-px w-full bg-slate-200"></div>
-                </div>
+               
 
 
-                <form class="w-full">
-                    <label for="email" class="sr-only">Email address</label>
-                    <input name="email" type="email" autocomplete="email" required=""
-                        class="block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
-                        placeholder="Email Address" value=""/>
-                    <label for="password" class="sr-only">Password</label>
-                    <input name="password" type="password" autocomplete="current-password" required=""
-                        class="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
-                        placeholder="Password" value=""/>
-                    <p class="mb-3 mt-2 text-sm text-gray-500">
-                        <a href="/forgot-password" class="text-blue-800 hover:text-blue-600">Reset your password?</a>
-                    </p>
-                    <button type="submit"
-                        class="inline-flex w-full items-center justify-center rounded-lg bg-black p-2 py-3 text-sm font-medium text-white outline-none focus:ring-2 focus:ring-black focus:ring-offset-1 disabled:bg-gray-400">
-                        Continue
-                    </button>
-                </form>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name" className="block text-gray-800 font-bold mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="w-full border border-gray-300 p-2 rounded-lg"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div className=' grid grid-cols-2'>
 
-                <div class="mt-6 text-center text-sm text-slate-600">
-                    Don't have an account?
-                    <a href="/signup" class="font-medium text-[#4285f4]">Sign up</a>
-                </div>
+            
+            <div>
+              <label htmlFor="email" className="block text-gray-800 font-bold mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full border border-gray-300 p-2 rounded-lg"
+                placeholder="Enter your email address"
+              />
+            </div>
+            <div>
+              <label htmlFor="phone" className="block text-gray-800 font-bold mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                className="w-full border border-gray-300 p-2 rounded-lg"
+                placeholder="Enter your phone number"
+              />
+            </div>
+            </div>
+
+            <div className=' grid grid-cols-2'>
+
+            <div>
+              <label htmlFor="course" className="block text-gray-800 font-bold mb-2">
+                Select Course
+              </label>
+              <select
+                id="course"
+                name="course"
+                className="w-full border border-gray-300 p-2 rounded-lg"
+              >
+                <option value="">Select a course</option>
+                <option value="course1">Course 1</option>
+                <option value="course2">Course 2</option>
+                <option value="course3">Course 3</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="center" className="block text-gray-800 font-bold mb-2">
+                Select Center
+              </label>
+              <select
+                id="center"
+                name="center"
+                className="w-full border border-gray-300 p-2 rounded-lg"
+              >
+                <option value="">Select a center</option>
+                <option value="center1">Center 1</option>
+                <option value="center2">Center 2</option>
+                <option value="center3">Center 3</option>
+              </select>
+            </div>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="w-full rounded-3xl bg-black px-6 py-2 text-xl font-medium uppercase text-white"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+
+              
             </div>
         </div>
     </div>
