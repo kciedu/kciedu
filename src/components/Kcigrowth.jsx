@@ -32,27 +32,28 @@ const Kcigrowth = () => {
 
 
   return (
-    <div class="antialiased h-[50vh] flex justify-evenly space-x-16 items-center text-center bg-gray-50 text-gray-800 flex-wrap">
-    <div className="w-36 h-36 rounded-full flex items-center justify-center flex-col" style={{ boxShadow: 'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset' }}>
-      <span class="text-4xl font-bold text-blue-900" 
+    <div class="antialiased h-[50vh] flex justify-evenly  items-center text-center bg-gray-50 text-gray-800 flex-wrap">
+    
+    <div className=" w-20 h-20 lg:w-36 lg:h-36 rounded-full flex items-center justify-center flex-col" style={{ boxShadow: 'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset' }}>
+      <span class="text-lg sm:text-2xl lg:text-3xl font-bold text-blue-900" 
        >
         {Students}+
       </span>
-      <p>Students</p>
+      <p className=' text-sm lg:text-xl'>Students</p>
     </div>
-    <div className="w-36 h-36 rounded-full flex items-center justify-center flex-col" style={{ boxShadow: 'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset' }}>
-      <span class="text-4xl font-bold text-blue-900" 
+    <div className="w-20 h-20 lg:w-36 lg:h-36 rounded-full flex items-center justify-center flex-col" style={{ boxShadow: 'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset' }}>
+      <span class="text-lg sm:text-2xl lg:text-3xl font-bold text-blue-900"  
        >
         {course}+
       </span>
-      <p>course</p>
+      <p className=' text-sm lg:text-xl'>course</p>
     </div>
-    <div className="w-36 h-36 rounded-full flex items-center justify-center flex-col" style={{ boxShadow: 'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset' }}>
-      <span class="text-4xl font-bold text-blue-900" 
+    <div className="w-20 h-20 lg:w-36 lg:h-36 rounded-full flex items-center justify-center flex-col" style={{ boxShadow: 'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset' }}>
+      <span class="text-lg sm:text-2xl lg:text-3xl font-bold text-blue-900" 
        >
         {Placements}+
       </span>
-      <p>Placements</p>
+      <p className=' text-[0.6rem] lg:text-xl'>Placements</p>
     </div>
   </div>
     

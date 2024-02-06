@@ -14,6 +14,7 @@ const Login = () => {
  const{setuser ,setlogin}= useContext(userconetxt)
  const [show ,setShow] =useState(false)
  const [error, setError] = useState('');
+ const [isLoading, setIsLoading] = useState(false);
  const navigate = useNavigate();
 
 
@@ -31,6 +32,7 @@ const [password , setPassowrd] = useState('')
 const Logindata = async (event) => {
   
   event.preventDefault();
+  setIsLoading(true);
   try {
     const data = new URLSearchParams({
       email,
@@ -46,8 +48,7 @@ const Logindata = async (event) => {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log('Token:', responseData.token);
-      console.log('Response Data:', responseData);
+     
       localStorage.setItem('token', responseData.token);
 
       if (responseData.isAdmin) {
@@ -66,6 +67,9 @@ const Logindata = async (event) => {
   } catch (error) {
     setError('Something went wrong during login.');
     console.error('Error during login:', error);
+  }
+  finally {
+    setIsLoading(false);
   }
 };
 
@@ -145,7 +149,7 @@ const Logindata = async (event) => {
           <input
             className="mt-4 cursor-pointer bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
             type="submit"
-          value={'Login'}
+            value={isLoading ? 'Loading...' : 'Login'}
           />
             
         </div>

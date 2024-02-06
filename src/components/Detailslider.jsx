@@ -25,7 +25,7 @@ function Detailslider() {
   return (
     <div className={containerClass}>
       <marquee behavior="alternate">
-        <div className="icon text-white text-lg text-[0.75rem] md:text-sm">
+        <div className="icon text-white  text-[0.7rem] md:text-sm">
           Kci Education contact number <span className="text-white">1234534556</span>
         </div>
       </marquee>
